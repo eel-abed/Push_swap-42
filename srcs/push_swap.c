@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:22:54 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/08/13 13:38:27 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/08/13 14:55:48 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int main(int argc, char **argv)
 {
-	t_stack *stack_a;
-	t_stack *stack_b;
-	int i;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+	int		i;
 
 	if (argc < 2)
 		return (0);
-	stack_a = create_stack(argc -1);
-	stack_b = create_stack(argc -1);
+	stack_a = create_stack(argc - 1);
+	stack_b = create_stack(argc - 1);
 
 	if (!stack_a || !stack_b)
 		return (0);
