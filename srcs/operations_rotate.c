@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:46:49 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/08/13 13:47:22 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:05:09 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,23 @@ void ra(t_stack *stack_a)
 		}
 		stack_a->array[0] = tmp;
 		write(1, "ra\n", 3);
+	}
+}
+void rb(t_stack *stack_b)
+{
+	int tmp;
+	int i;
+
+	if (stack_b->top >= 1)
+	{
+		tmp = stack_b->array[stack_b->top];
+		i = stack_b->top;
+		while (i > 0)
+		{
+			stack_b->array[i] = stack_b->array[i - 1];
+			i--;
+		}
+		stack_b->array[0] = tmp;
+		write(1, "rb\n", 3);
 	}
 }

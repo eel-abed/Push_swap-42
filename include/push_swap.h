@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:23:13 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/08/13 14:53:41 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:05:21 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		is_sorted(t_stack *stack);
 void	sort_stack(t_stack *a, t_stack *b);
 int		find_position(t_stack *stack, int num);
 void	ra(t_stack *stack);
-
+void	rb(t_stack *stack_b);
 
 
 
