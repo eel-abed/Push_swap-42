@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:23:46 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/08/21 15:54:06 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:38:50 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int is_sorted(t_stack *stack)
 	i = stack->top;
 	while (i > 0)
 	{
-		if (stack->array[i] > stack->array[i - 1])
+		if (stack->array[i] < stack->array[i - 1])
 			return (0);
 		i--;
 	}
