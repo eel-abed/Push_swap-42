@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:23:13 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/08/13 15:05:21 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:16:41 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 
 typedef struct s_stack
 {
@@ -33,11 +34,12 @@ int		pop(t_stack *stack);
 t_stack	*create_stack(int size);
 int		has_duplicates(t_stack *stack);
 int		is_sorted(t_stack *stack);
-void	sort_stack(t_stack *a, t_stack *b);
-int		find_position(t_stack *stack, int num);
 void	ra(t_stack *stack);
 void	rb(t_stack *stack_b);
-
+void	rr(t_stack *stack_a, t_stack *stack_b);
+void	rra(t_stack *stack_a);
+void	rrb(t_stack *stack_b);
+void	rrr(t_stack *stack_a, t_stack *stack_b);
 
 
 #endif

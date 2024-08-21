@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:23:46 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/08/13 13:36:57 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:54:06 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,11 @@ int is_sorted(t_stack *stack)
 		i--;
 	}
 	return (1);
+}
+
+void rrr(t_stack *stack_a, t_stack *stack_b)
+{
+	rra(stack_a);
+	rrb(stack_b);
+	write(1, "rrr\n", 4);
 }
