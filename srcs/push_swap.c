@@ -6,79 +6,53 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:22:54 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/08/23 17:05:29 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/08/26 13:30:41 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void reverse_stack(t_stack *stack)
+static void initialize_stacks(t_stack *a, t_stack *b, int *numbers, int count)
 {
-    t_stack *reversed_stack;
-    int value;
+    int i;
 
-    reversed_stack = create_stack(stack->size);
-    if (!reversed_stack)
+    a->top = NULL;
+    a->size = 0;
+    b->top = NULL;
+    b->size = 0;
+
+    i = count - 1;
+    while (i >= 0)
     {
-        printf("Error\n");
-        return;
+        stack_push(a, numbers[i]);
+        i--;
     }
-
-    while (stack->top >= 0)
-    {
-        value = pop(stack);
-        push(reversed_stack, value);
-    }
-
-    free(stack->array);
-    stack->array = reversed_stack->array;
-    stack->top = reversed_stack->top;
-    free(reversed_stack);
 }
-int main(int argc, char **argv)
+
+int	main(int argc, char **argv)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
-	int		i;
+	t_stack	a;
+	t_stack	b;
+	int		*numbers;
+	int		count;
 
 	if (argc < 2)
-	{
-		printf("Usage: ./push_swap [numbers]\n");
 		return (0);
-	}
-	stack_a = create_stack(argc - 1);
-	stack_b = create_stack(argc - 1);
-
-	if (!stack_a || !stack_b)
+	numbers = parse_arguments(argc, argv, &count);
+	if (!numbers)
 	{
-		printf("Error\n");
-		return (0);
+		write(2, "Error\n", 6);
+		return (1);
 	}
 
-	i = 1;
-	while (i < argc)
-	{
-		push(stack_a, atoi(argv[i]));
-		i++;
-	}
+	initialize_stacks(&a, &b, numbers, count);
+	free(numbers); // Nous n'avons plus besoin du tableau initial
 
-	if (has_duplicates(stack_a))
-	{
-		printf("Error\n");
-		return (0);
-	}
+	if (a.size > 1) // Ne triez que s'il y a plus d'un élément
+		turk_sort(&a, &b);
 
-	if (is_sorted(stack_a))
-	{
-		printf("Stack is already sorted\n");
-		return (0);
-	}
-	reverse_stack(stack_a);
-	sort(stack_a, stack_b);
-	
-	free(stack_a->array);
-	free(stack_a);
-	free(stack_b->array);
-	free(stack_b);
+	free_stack(&a);
+	free_stack(&b);
+
 	return (0);
 }

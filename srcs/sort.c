@@ -6,188 +6,179 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:41:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/08/23 17:04:31 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:00:02 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <limits.h>
-static int find_min(t_stack *stack)
-{
-    int i;
-    int min;
-    int min_index;
 
-    i = 0;
-    min = stack->array[0];
-    min_index = 0;
-    while (i <= stack->top)
-    {
-        if (stack->array[i] < min)
-        {
-            min = stack->array[i];
-            min_index = i;
-        }
-        i++;
-    }
-    return min_index;
-}
 
-static void sort_three(t_stack *stack)
-{
-    int a = stack->array[2];
-    int b = stack->array[1];
-    int c = stack->array[0];
+void sort_three(t_stack *a) {
+    if (a == NULL || a->size != 3)
+        return;
 
-    if (a > b && b < c && a < c)
-        sa(stack);
-    else if (a > b && b > c)
-    {
-        sa(stack);
-        rra(stack);
-    }
-    else if (a > b && b < c && a > c)
-        ra(stack);
-    else if (a < b && b > c && a < c)
-    {
-        sa(stack);
-        ra(stack);
-    }
-    else if (a < b && b > c && a > c)
-        rra(stack);
-}
+    int first = a->top->value;
+    int second = a->top->next->value;
+    int third = a->top->next->next->value;
 
-static int find_cheapest(t_stack *stack_a, t_stack *stack_b)
-{
-    int i;
-    int cheapest_index;
-    int cost;
-    int min_cost;
-
-    i = 0;
-    min_cost = INT_MAX;
-    while (i <= stack_a->top)
-    {
-        cost = 0;
-        // Calculate cost to move to top of stack_a
-        if (i <= stack_a->top / 2)
-            cost += i;
-        else
-            cost += stack_a->top - i + 1;
-        
-        // Calculate cost to insert into correct position in stack_b
-        int j = 0;
-        while (j <= stack_b->top && stack_b->array[j] < stack_a->array[i])
-            j++;
-        if (j <= stack_b->top / 2)
-            cost += j;
-        else
-            cost += stack_b->top - j + 1;
-        
-        if (cost < min_cost)
-        {
-            min_cost = cost;
-            cheapest_index = i;
-        }
-        i++;
-    }
-    return cheapest_index;
-}
-
-static void move_to_b(t_stack *stack_a, t_stack *stack_b, int index)
-{
-    if (index <= stack_a->top / 2)
-    {
-        while (index > 0)
-        {
-            ra(stack_a);
-            index--;
-        }
-    }
-    else
-    {
-        while (index <= stack_a->top)
-        {
-            rra(stack_a);
-            index++;
-        }
-    }
-    pb(stack_b, stack_a);
-}
-
-static void move_to_a(t_stack *stack_a, t_stack *stack_b)
-{
-    int index;
-    
-    while (stack_b->top >= 0)
-    {
-        index = 0;
-        while (index <= stack_a->top && stack_a->array[index] < stack_b->array[stack_b->top])
-            index++;
-        
-        if (index <= stack_a->top / 2)
-        {
-            while (index > 0)
-            {
-                ra(stack_a);
-                index--;
-            }
-        }
-        else
-        {
-            while (index <= stack_a->top)
-            {
-                rra(stack_a);
-                index++;
-            }
-        }
-        pa(stack_a, stack_b);
+    if (first > second && second < third && first < third) {
+        sa(a); // Swap first and second
+    } else if (first > second && second > third && first > third) {
+        sa(a); // Swap first and second
+        rra(a); // Reverse rotate
+    } else if (first > second && second < third && first > third) {
+        ra(a); // Rotate
+    } else if (first < second && second > third && first < third) {
+        sa(a); // Swap first and second
+        ra(a); // Rotate
+    } else if (first < second && second > third && first > third) {
+        rra(a); // Reverse rotate
     }
 }
 
-void sort(t_stack *stack_a, t_stack *stack_b)
-{
-    int size = stack_a->top + 1;
+void rotate_to_top(t_stack *a, int value) {
+    if (a == NULL || a->top == NULL) {
+        return; // Handle empty stack case
+    }
 
-    if (size <= 3)
-    {
-        sort_three(stack_a);
+    int position = 0;
+    t_node *current = a->top;
+
+    // Find the position of the value in Stack A
+    while (current && current->value != value) {
+        position++;
+        current = current->next;
+    }
+
+    // If the value is not found, return
+    if (current == NULL) {
         return;
     }
 
-    // Push first two elements to stack_b
-    pb(stack_b, stack_a);
-    pb(stack_b, stack_a);
+    // Determine the number of rotations needed
+    int rotations = position;
+    int reverse_rotations = a->size - position;
 
-    // Push remaining elements except last three
-    while (stack_a->top > 2)
-    {
-        int cheapest = find_cheapest(stack_a, stack_b);
-        move_to_b(stack_a, stack_b, cheapest);
-    }
-
-    // Sort remaining three elements in stack_a
-    sort_three(stack_a);
-
-    // Push back elements from stack_b to stack_a
-    move_to_a(stack_a, stack_b);
-
-    // Rotate stack_a to bring minimum to top
-    int min_index = find_min(stack_a);
-    if (min_index <= stack_a->top / 2)
-    {
-        while (min_index > 0)
-        {
-            ra(stack_a);
-            min_index--;
+    // Perform rotations
+    if (rotations <= reverse_rotations) {
+        // Forward rotations
+        for (int i = 0; i < rotations; i++) {
+            ra(a); // Assuming ra function rotates the stack upwards
+        }
+    } else {
+        // Reverse rotations
+        for (int i = 0; i < reverse_rotations; i++) {
+            rra(a); // Assuming rra function rotates the stack downwards
         }
     }
-    else
-    {
-        while (min_index <= stack_a->top)
-        {
-            rra(stack_a);
-            min_index++;
-        }
+}
+
+
+int calculate_operations(t_stack *a, t_stack *b, int value) {
+    int a_rotations = 0;
+    int b_rotations = 0;
+    t_node *current = a->top;
+
+    // Find the position of the value in Stack A
+    while (current && current->value != value) {
+        a_rotations++;
+        current = current->next;
     }
+
+    // Find the correct position in Stack B
+    current = b->top;
+    while (current) {
+        if (current->value < value && (!current->next || current->next->value > value)) {
+            break;
+        }
+        b_rotations++;
+        current = current->next;
+    }
+
+    // If the value should be placed at the end of Stack B
+    if (!current) {
+        b_rotations = b->size;
+    }
+
+    // Calculate the total number of operations
+    int total_operations = a_rotations + b_rotations;
+
+    // Consider reverse rotations if they are more efficient
+    if (a_rotations > a->size / 2) {
+        a_rotations = a->size - a_rotations;
+    }
+    if (b_rotations > b->size / 2) {
+        b_rotations = b->size - b_rotations;
+    }
+
+    total_operations = a_rotations + b_rotations;
+
+    return total_operations;
+}
+int find_min_value(t_stack *a) {
+    if (a == NULL || a->top == NULL) {
+        return INT_MAX; // or handle the error appropriately
+    }
+
+    int min_value = a->top->value;
+    t_node *current = a->top->next;
+
+    // Traverse Stack A
+    while (current) {
+        // Compare and update the minimum value
+        if (current->value < min_value) {
+            min_value = current->value;
+        }
+        current = current->next;
+    }
+
+    return min_value;
+}
+int find_correct_position(t_stack *a, int value) {
+    t_node *current = a->top;
+    t_node *best_node = NULL;
+
+    while (current) {
+        if (current->value > value && (!best_node || current->value < best_node->value)) {
+            best_node = current;
+        }
+        current = current->next;
+    }
+
+    if (best_node) {
+        return best_node->value;
+    }
+
+    // If no suitable position is found, return the minimum value
+    return find_min_value(a);
+}
+
+
+
+void turk_sort(t_stack *a, t_stack *b) {
+    // Push elements to Stack B until 3 elements are left in Stack A
+    while (a->size > 3) {
+        pb(a, b);
+    }
+
+    // Sort the last three elements in Stack A
+    sort_three(a);
+
+    // Push elements back to Stack A
+    while (b->size > 0) {
+        int target_value = find_correct_position(a, b->top->value);
+        rotate_to_top(a, target_value);
+        pa(a, b);
+    }
+
+    // Final arrangement
+    int min_value = find_min_value(a);
+    rotate_to_top(a, min_value);
+
+    // Print the sorted stack
+    printf("stackA: ");
+    for (t_node *tmp = a->top; tmp; tmp = tmp->next)
+        printf("%d ", tmp->value);
+    printf("\n");
 }
