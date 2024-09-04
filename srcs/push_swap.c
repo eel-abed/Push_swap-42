@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:22:54 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/08/26 13:30:41 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:56:43 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ int	main(int argc, char **argv)
 	initialize_stacks(&a, &b, numbers, count);
 	free(numbers); // Nous n'avons plus besoin du tableau initial
 
-	if (a.size > 1) // Ne triez que s'il y a plus d'un élément
-		turk_sort(&a, &b);
-
+	radix_sort(&a, &b);
+	
 	free_stack(&a);
 	free_stack(&b);
 

@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:23:13 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/08/26 13:35:12 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:56:06 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	rrb(t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
 
 // Fonctions d'algorithme
-void	turk_sort(t_stack *a, t_stack *b);
+void radix_sort(t_stack *a, t_stack *b);
 
 // Fonctions utilitaires
 int		is_number(char *str);
