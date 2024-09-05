@@ -6,11 +6,27 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:22:54 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/09/04 14:41:57 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:58:19 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	is_sorted(t_stack *stack)
+{
+	t_node	*current;
+
+	if (!stack->top || !stack->top->next)
+		return (1);
+	current = stack->top;
+	while (current->next)
+	{
+		if (current->value > current->next->value)
+			return (0);
+		current = current->next;
+	}
+	return (1);
+}
 
 int	ft_pow(int base, int exp)
 {
@@ -58,7 +74,8 @@ int	main(int argc, char **argv)
 	}
 	initialize_stacks(&a, &b, numbers, count);
 	free(numbers);
-	radix_sort(&a, &b);
+	if (count > 1 && !is_sorted(&a))
+		radix_sort(&a, &b);
 	free_stack(&a);
 	free_stack(&b);
 	return (0);

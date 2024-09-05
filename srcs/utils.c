@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:23:46 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/09/04 14:43:00 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:32:06 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,27 @@
 
 int	is_number(char *str)
 {
-	int	i;
+	long	num;
+	int		sign;
+	int		i;
 
+	num = 0;
+	sign = 1;
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
 		i++;
+	}
+	if (!str[i])
+		return (0);
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		num = num * 10 + (str[i] - '0');
+		if ((sign == 1 && num > INT_MAX) || (sign == -1 && - num < INT_MIN))
 			return (0);
 		i++;
 	}

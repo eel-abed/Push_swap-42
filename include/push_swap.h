@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:23:13 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/09/04 14:43:34 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:06:55 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <limits.h>
 
 typedef struct s_node
 {
@@ -54,5 +55,6 @@ int		has_duplicates(int *numbers, int count);
 int		*parse_arguments(int argc, char **argv, int *count);
 void	free_stack(t_stack *stack);
 int		ft_pow(int base, int exp);
+int		is_sorted(t_stack *stack);
 
 #endif
