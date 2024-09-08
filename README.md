@@ -1,6 +1,6 @@
 # Push_swap
 
-![Push_swap Visualization](https://raw.githubusercontent.com/yourusername/Push_swap-42/main/push_swap_visualization.png)
+![Push_swap Visualization](/Diagram_pushswap.png)
 
 ## Table of Contents
 - [Introduction](#introduction)
