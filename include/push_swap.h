@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:23:13 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/09/05 15:06:55 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/09/08 14:57:09 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,10 @@ int		*parse_arguments(int argc, char **argv, int *count);
 void	free_stack(t_stack *stack);
 int		ft_pow(int base, int exp);
 int		is_sorted(t_stack *stack);
+void	sort_2(t_stack *a);
+void	sort_3(t_stack *a);
+void	sort_5(t_stack *a, t_stack *b);
+char	**ft_split(char const *s, char c);
+void	free_split(char **str);
 
 #endif

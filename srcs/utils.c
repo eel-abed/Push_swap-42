@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:23:46 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/09/05 15:32:06 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/09/08 15:32:55 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,34 +59,6 @@ int	has_duplicates(int *numbers, int count)
 		i++;
 	}
 	return (0);
-}
-
-int	*parse_arguments(int argc, char **argv, int *count)
-{
-	int	*numbers;
-	int	i;
-
-	*count = argc - 1;
-	numbers = (int *)malloc(sizeof(int) * *count);
-	if (!numbers)
-		return (NULL);
-	i = 0;
-	while (i < *count)
-	{
-		if (!is_number(argv[i + 1]))
-		{
-			free(numbers);
-			return (NULL);
-		}
-		numbers[i] = atoi(argv[i + 1]);
-		i++;
-	}
-	if (has_duplicates(numbers, *count))
-	{
-		free(numbers);
-		return (NULL);
-	}
-	return (numbers);
 }
 
 void	free_stack(t_stack *stack)

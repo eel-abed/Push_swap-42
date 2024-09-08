@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:41:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/09/05 15:31:37 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/09/08 14:28:03 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,6 @@ int	get_max_value(t_stack *stack)
 int	get_digit(int value, int position)
 {
 	return ((value / ft_pow(10, position)) % 10);
-}
-
-void	sort_3(t_stack *a)
-{
-	if (a->top->value > a->top->next->value
-		&& a->top->next->value > a->top->next->next->value)
-		sa(a);
-	else if (a->top->value > a->top->next->value
-		&& a->top->value > a->top->next->next->value)
-		rra(a);
-	else if (a->top->value < a->top->next->value
-		&& a->top->next->value > a->top->next->next->value)
-		ra(a);
 }
 
 static	void	init_radix_sort(t_stack *a, int *max_bits, int *max_value)
@@ -79,6 +66,4 @@ void	radix_sort(t_stack *a, t_stack *b)
 			pa(a, b);
 		i++;
 	}
-	if (a->size == 3)
-		sort_3(a);
 }

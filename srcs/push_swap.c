@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:22:54 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/09/05 14:58:19 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/09/08 15:18:19 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,18 @@ static void	initialize_stacks(t_stack *a, t_stack *b, int *numbers, int count)
 	}
 }
 
+static void	sort_stack(t_stack *a, t_stack *b, int count)
+{
+	if (count == 2)
+		sort_2(a);
+	else if (count == 3)
+		sort_3(a);
+	else if (count <= 5)
+		sort_5(a, b);
+	else
+		radix_sort(a, b);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	a;
@@ -68,14 +80,11 @@ int	main(int argc, char **argv)
 		return (0);
 	numbers = parse_arguments(argc, argv, &count);
 	if (!numbers)
-	{
-		write(2, "Error\n", 6);
-		return (1);
-	}
+		return (write(2, "Error\n", 6), 1);
 	initialize_stacks(&a, &b, numbers, count);
 	free(numbers);
 	if (count > 1 && !is_sorted(&a))
-		radix_sort(&a, &b);
+		sort_stack(&a, &b, count);
 	free_stack(&a);
 	free_stack(&b);
 	return (0);
