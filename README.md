@@ -87,7 +87,7 @@ endLine: 73
 
 To better understand how the algorithm works, you can use the Push_swap Visualizer. Here's a snapshot of the visualization:
 
-![Push_swap Visualization](https://raw.githubusercontent.com/eel-abed/Push_swap-42/main/push_swap_visualization.png)
+![Push_swap Visualization](https://camo.githubusercontent.com/2dd938af11d26d77728c954b4eab035200733dfa6506bc007584274bb2d2e985/68747470733a2f2f692e696d6775722e636f6d2f7a7163735a66592e706e67)
 
 This image demonstrates the state of both stacks at different stages of the sorting process.
 
