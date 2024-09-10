@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:26:32 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/09/05 16:36:32 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/09/09 15:49:46 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,21 @@ void	sort_3(t_stack *a)
 void	sort_5(t_stack *a, t_stack *b)
 {
 	int	min;
+	int	i;
 
-	while (a->size > 3)
+	i = 0;
+	while (i < 2)
 	{
 		min = find_min(a);
 		while (a->top->value != min)
-			ra(a);
+		{
+			if (a->top->next->value == min)
+				sa(a);
+			else
+				ra(a);
+		}
 		pb(a, b);
+		i++;
 	}
 	sort_3(a);
 	while (b->size > 0)
