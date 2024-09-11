@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:26:32 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/09/09 15:49:46 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/09/11 15:28:42 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void	sort_3(t_stack *a)
 		ra(a);
 	else if (a->top->value > a->top->next->value)
 		sa(a);
+	else if (a->top->value > a->top->next->next->value)
+		rra(a);
 	else if (a->top->next->value > a->top->next->next->value)
 	{
 		sa(a);
 		ra(a);
 	}
-	else if (a->top->value > a->top->next->next->value)
-		rra(a);
 }
 
 void	sort_5(t_stack *a, t_stack *b)
